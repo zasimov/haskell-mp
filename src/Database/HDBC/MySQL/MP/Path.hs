@@ -1,9 +1,10 @@
 module Database.HDBC.MySQL.MP.Path (
        Path(..),
-       mkPath,   -- [Int] -> Path
-       isRoot,   -- Path -> Bool
-       getRoot,  -- Path -> Maybe Path
-       joinPath  -- Path -> Path -> Path
+       mkPath,    -- [Int] -> Path
+       isRoot,    -- Path -> Bool
+       getRoot,   -- Path -> Maybe Path
+       joinPath,  -- Path -> Path -> Path
+       showMaybePath -- Maybe Path -> String
 ) where
 
 import Database.HDBC.MySQL.MP.Join (join)
@@ -57,3 +58,8 @@ getRoot path
     | isRoot path = Nothing
     |  otherwise = let (Path (x:xs) _) = path
                    in Just (Path xs x)
+
+
+showMaybePath :: Maybe Path -> String
+showMaybePath Nothing = ""
+showMaybePath (Just path) = show path
